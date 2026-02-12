@@ -159,7 +159,7 @@ Result in Excel:
 ### Custom Styles
 
 ```go
-r := esb.New(cols,
+builder := esb.New[Product](cols,
     esb.WithHeaderStyle[Product](func(s *excelize.Style) {
         s.Font = &excelize.Font{Size: 14, Bold: true}
         s.Border = []excelize.Border{
@@ -170,7 +170,7 @@ r := esb.New(cols,
         }
     }),
     esb.WithBodyStyle[Product](func(s *excelize.Style) {
-        s.Font = &excelize.Font{Size: 12}
+        s.Font = &excelize.Font{Size: 13}
     }),
 )
 ```

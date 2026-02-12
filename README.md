@@ -34,11 +34,11 @@ cols := []esb.Column{
     esb.Col("Stock", func(p Product) int { return p.Stock }),
 }
 
-r := esb.New[Product](cols)
 f := excelize.NewFile()
 defer f.Close()
 
-f, _ = r.WriteTo(f, "Products", products)
+builder := esb.New[Product](cols)
+f, _ = builder.WriteTo(f, "Products", products)
 _ = f.SaveAs("products.xlsx")
 ```
 
@@ -118,11 +118,11 @@ cols := []esb.Column{
     esb.Col("Status", func(s Server) string { return s.Status }),
 }
 
-r := esb.New[Server](cols)
 f := excelize.NewFile()
 defer f.Close()
 
-f, _ = r.WriteTo(f, "Servers", servers)
+builder := esb.New[Server](cols)
+f, _ = builder.WriteTo(f, "Servers", servers)
 _ = f.SaveAs("servers.xlsx")
 ```
 

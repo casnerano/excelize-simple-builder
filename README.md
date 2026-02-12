@@ -34,10 +34,12 @@ cols := []esb.Column{
     esb.Col("Stock", func(p Product) int { return p.Stock }),
 }
 
-r := esb.New(cols)
+r := esb.New[Product](cols)
 f := excelize.NewFile()
+defer f.Close()
+
 f, _ = r.WriteTo(f, "Products", products)
-f.SaveAs("products.xlsx")
+_ = f.SaveAs("products.xlsx")
 ```
 
 Result in Excel:

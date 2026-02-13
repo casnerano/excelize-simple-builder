@@ -69,7 +69,10 @@ func renderData(f *excelize.File, sheet string, cols []Column, row any, rowIdx i
 	var render func([]Column, any, int) error
 	render = func(cols []Column, row any, rowIdx int) error {
 		for _, c := range cols {
-			val := c.Value(row)
+			var val any
+			if c.Value != nil {
+				val = c.Value(row)
+			}
 
 			if len(c.NestedCols) == 0 {
 				cell, _ := excelize.CoordinatesToCellName(currentCol, rowIdx)

@@ -39,6 +39,9 @@ func Col[T, V any](header string, getter func(T) V) Column {
 	return Column{
 		Title: header,
 		Value: func(row any) any {
+			if row == nil {
+				return nil
+			}
 			return getter(row.(T))
 		},
 	}
@@ -48,6 +51,9 @@ func Group[T, V any](header string, getter func(T) V, nestedCols ...Column) Colu
 	return Column{
 		Title: header,
 		Value: func(row any) any {
+			if row == nil {
+				return nil
+			}
 			return getter(row.(T))
 		},
 		NestedCols: nestedCols,
